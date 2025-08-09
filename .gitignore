@@ -1,0 +1,48 @@
+# --- Dependencias y build ---
+node_modules/
+dist/
+dist-ssr/
+.vite/
+
+# Cache / herramientas
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+.cache/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Entornos
+.env
+.env.*.local
+!.env.example
+
+# Sistemas / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Varias
+*.local
+*.swp
+*.swo
+~$*
+*.orig
+
+# Cobertura / pruebas
+coverage/
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Lockfiles alternativos (mantén solo uno si decides cambiar gestor)
+# yarn.lock
+# pnpm-lock.yaml
