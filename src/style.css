@@ -283,6 +283,22 @@ footer {
 	color: #fff;
 }
 
+/* Enlace GitHub al extremo derecho */
+.sticky-nav .gh-link {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.4rem 0.65rem;
+	background: #1a1f26;
+	border: 1px solid #272e37;
+	border-radius: 10px;
+	transition: background .3s, border-color .3s;
+}
+.sticky-nav .gh-link svg { width:16px; height:16px; fill:#cdd5e0; display:block; }
+.sticky-nav .gh-link:hover { background:#232a33; border-color:#323b46; }
+.sticky-nav .gh-link:active { background:#151a21; }
+
 /* Galería: 3 tarjetas por fila, centradas; la última fila se centra automáticamente */
 .gallery {
 	display: flex;
@@ -544,4 +560,18 @@ footer {
 	font-size: 0.75rem;
 	line-height: 1.3;
 	opacity: 0.85;
+}
+
+.repo-container {
+	margin-top: 1.4rem;
+	font-size: 1rem;
+	opacity: 0.8;
+}
+
+.repo-link {
+	display: inline-flex;
+	align-items: center;
+	gap: .45rem;
+	color: var(--accent2);
+	text-decoration: none;
 }

@@ -156,7 +156,9 @@ export const galeriaCreativeCommons = [
 
 export const creditos = [
   'Síntesis elaborada por Gloria Labory Pesquer para la asignatura historia del arte, impartida por la profesora Susana García Mangas en agosto de 2025.',
-  'Librerías de JavaScript utilizadas: Vue.js, GSAP, Three.js.'
+  'Librerías de JavaScript utilizadas: Vue.js, GSAP, Three.js.',
+  'Tipografías utilizadas: Inter y Playfair Display (SIL Open Font License)',
+  'Optimización de imágenes WebP comprimidas en https://www.squoosh.app/'
 ];
 
 export const bibliografia = [
