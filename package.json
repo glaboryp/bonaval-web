@@ -6,15 +6,22 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-  "gsap": "^3.13.0",
-  "three": "^0.160.0",
+    "gsap": "^3.13.0",
+    "three": "^0.160.0",
     "vue": "^3.4.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.33.0",
     "@vitejs/plugin-vue": "^5.0.0",
-    "vite": "^5.2.0"
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-vue": "^9.33.0",
+    "vite": "^5.2.0",
+    "vue-eslint-parser": "^9.4.3"
   }
 }
