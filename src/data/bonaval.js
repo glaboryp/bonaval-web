@@ -10,7 +10,7 @@ export const conventoMeta = {
   patronos: ['Casa de Altamira', 'Arzobispo Antonio de Monroy'],
   arquitectosDestacados: ['Domingo de Andrade'],
   elementosSingulares: ['Triple escalera helicoidal de tres espirales independientes', 'Claustro con artificio óptico para cuadrar planta trapezoidal', 'Panteón de Gallegos Ilustres', 'Fachada barroca con escudos y sartas de frutas'],
-};
+}
 
 export const cronologia = [
   { fecha: 1220, titulo: 'Tradición fundacional', texto: 'Fundado según la tradición en 1220 por Santo Domingo de Guzmán.' },
@@ -21,7 +21,7 @@ export const cronologia = [
   { fecha: 'Siglo XIX', titulo: 'Desamortización', texto: 'Entró a formar parte de los bienes del municipio de Santiago, instalándose aquí un hospicio y un colegio para discapacitados' },
   { fecha: 1963, titulo: 'Museo municipal', texto: 'Se inaugura museo en parte del edificio.' },
   { fecha: 2015, titulo: 'Camino de Santiago', texto: 'Figura como elemento asociado en ampliación del Camino de Santiago.' }
-];
+]
 
 export const panteon = {
   descripcion: 'Capilla lateral que acoge restos de personalidades clave de la cultura e identidad de Galicia.',
@@ -75,7 +75,7 @@ export const panteon = {
       aporte: 'Intelectual clave, símbolo del galleguismo.'
     }
   ]
-};
+}
 
 export const curiosidades = [
   {
@@ -102,7 +102,7 @@ export const curiosidades = [
     img: '/curiosidades/parque.webp',
     alt: 'Rincón verde del parque de Bonaval',
   }
-];
+]
 
 export const galeriaCreativeCommons = [
   {
@@ -152,17 +152,17 @@ export const galeriaCreativeCommons = [
       '/galeria/triple-escalera_4.webp'
     ]
   }
-];
+]
 
 export const creditos = [
   'Síntesis elaborada por Gloria Labory Pesquer para la asignatura historia del arte, impartida por la profesora Susana García Mangas en agosto de 2025.',
   'Librerías de JavaScript utilizadas: Vue.js, GSAP, Three.js.',
   'Tipografías utilizadas: Inter y Playfair Display (SIL Open Font License)',
   'Optimización de imágenes WebP comprimidas en https://www.squoosh.app/'
-];
+]
 
 export const bibliografia = [
   { nombre: 'Arteguias', url: 'https://www.arteguias.com/convento/conventosantodomingobonavalsantiago.htm' },
   { nombre: 'Santiago Turismo', url: 'https://www.santiagoturismo.com/monumentos/igrexa-e-convento-de-san-domingos-de-bonaval' },
   { nombre: 'Audioguía', url: 'https://www.audioguia.org/info/convento-bonaval-compostela/' }
-];
+]

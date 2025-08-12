@@ -1,27 +1,70 @@
 <template>
   <Teleport to="body">
-    <div v-if="open" class="lightbox" @keydown.esc.prevent="close" tabindex="-1" ref="lbRoot">
-      <div class="lightbox-backdrop" @click="close" />
-      <div class="lightbox-dialog" role="dialog" :aria-label="item?.titulo">
+    <div
+      v-if="open"
+      ref="lbRoot"
+      class="lightbox"
+      tabindex="-1"
+      @keydown.esc.prevent="close"
+    >
+      <div
+        class="lightbox-backdrop"
+        @click="close"
+      />
+      <div
+        class="lightbox-dialog"
+        role="dialog"
+        :aria-label="item?.titulo"
+      >
         <header class="lightbox-header">
           <h3>{{ item?.titulo }}</h3>
-          <button class="close-btn" @click="close" aria-label="Cerrar">✕</button>
+          <button
+            class="close-btn"
+            aria-label="Cerrar"
+            @click="close"
+          >
+            ✕
+          </button>
         </header>
-        <div class="carousel" @pointerdown="onPointerDown" @pointermove="onPointerMove" @pointerup="onPointerUp" @pointerleave="onPointerUp">
-          <button class="nav prev" @click="prev" :disabled="idx===0" aria-label="Anterior">‹</button>
+        <div
+          class="carousel"
+          @pointerdown="onPointerDown"
+          @pointermove="onPointerMove"
+          @pointerup="onPointerUp"
+          @pointerleave="onPointerUp"
+        >
+          <button
+            class="nav prev"
+            :disabled="idx===0"
+            aria-label="Anterior"
+            @click="prev"
+          >
+            ‹
+          </button>
           <div class="slides">
-            <TransitionGroup name="fade" tag="div" class="slides-inner">
+            <TransitionGroup
+              name="fade"
+              tag="div"
+              class="slides-inner"
+            >
               <img
                 v-for="(src,i) in imagenes"
-                :key="src"
                 v-show="i===idx"
+                :key="src"
                 :src="src"
                 :alt="item?.titulo+' imagen '+(i+1)"
                 loading="lazy"
               />
             </TransitionGroup>
           </div>
-          <button class="nav next" @click="next" :disabled="idx===imagenes.length-1" aria-label="Siguiente">›</button>
+          <button
+            class="nav next"
+            :disabled="idx===imagenes.length-1"
+            aria-label="Siguiente"
+            @click="next"
+          >
+            ›
+          </button>
         </div>
         <footer class="lightbox-footer">
           <span>{{ idx+1 }} / {{ imagenes.length }}</span>
@@ -32,46 +75,46 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
+import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 
 const props = defineProps({
   modelValue: { type: Boolean, default: false },
   item: { type: Object, default: null }
-});
-const emit = defineEmits(['update:modelValue']);
+})
+const emit = defineEmits(['update:modelValue'])
 
-const open = ref(props.modelValue);
-watch(()=>props.modelValue, v=>{ open.value = v; if(v) focusRoot(); });
-watch(open, v=> emit('update:modelValue', v));
+const open = ref(props.modelValue)
+watch(()=>props.modelValue, v=>{ open.value = v; if (v) focusRoot() })
+watch(open, v=> emit('update:modelValue', v))
 
-const idx = ref(0);
-const lbRoot = ref(null);
+const idx = ref(0)
+const lbRoot = ref(null)
 
-const imagenes = ref([]);
+const imagenes = ref([])
 watch(()=>props.item, it=>{
-  idx.value = 0;
-  imagenes.value = it?.imagenes?.length ? it.imagenes : it?.img ? [it.img] : [];
-});
+  idx.value = 0
+  imagenes.value = it?.imagenes?.length ? it.imagenes : it?.img ? [it.img] : []
+})
 
-function focusRoot(){ requestAnimationFrame(()=> lbRoot.value?.focus()); }
-function close(){ open.value = false; }
-function next(){ if(idx.value < imagenes.value.length-1) idx.value++; }
-function prev(){ if(idx.value>0) idx.value--; }
+function focusRoot(){ requestAnimationFrame(()=> lbRoot.value?.focus()) }
+function close(){ open.value = false }
+function next(){ if (idx.value < imagenes.value.length - 1) idx.value++ }
+function prev(){ if (idx.value > 0) idx.value-- }
 
 function onKey(e){
-  if(!open.value) return;
-  if(e.key==='ArrowRight') { next(); }
-  if(e.key==='ArrowLeft') { prev(); }
-  if(e.key==='Escape'){ close(); }
+  if (!open.value) return
+  if (e.key === 'ArrowRight') { next() }
+  if (e.key === 'ArrowLeft') { prev() }
+  if (e.key === 'Escape'){ close() }
 }
 
-let startX = null;
-function onPointerDown(e){ startX = e.clientX; }
-function onPointerMove(e){ if(startX!=null){ const dx = e.clientX - startX; if(Math.abs(dx)>60){ dx<0?next():prev(); startX=null; } } }
-function onPointerUp(){ startX=null; }
+let startX = null
+function onPointerDown(e){ startX = e.clientX }
+function onPointerMove(e){ if (startX != null){ const dx = e.clientX - startX; if (Math.abs(dx) > 60){ dx < 0 ? next() : prev(); startX = null } } }
+function onPointerUp(){ startX = null }
 
-onMounted(()=>{ window.addEventListener('keydown', onKey); });
-onBeforeUnmount(()=>{ window.removeEventListener('keydown', onKey); });
+onMounted(()=>{ window.addEventListener('keydown', onKey) })
+onBeforeUnmount(()=>{ window.removeEventListener('keydown', onKey) })
 </script>
 
 <style scoped>
