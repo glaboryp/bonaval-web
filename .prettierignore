@@ -1,0 +1,13 @@
+# Salidas y dependencias
+node_modules/
+dist/
+
+# Archivos generados o estáticos pesados
+public/
+*.log
+
+# Vite cache
+.vite/
+
+# Coverage
+coverage/

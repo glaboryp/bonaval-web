@@ -30,32 +30,73 @@
 </template>
 
 <script setup>
-  defineProps({
-    secciones: { type: Array, required: true },
-    activeSection: { type: String, required: true }
-  })
-  const emit = defineEmits(['navigate'])
+defineProps({
+  secciones: { type: Array, required: true },
+  activeSection: { type: String, required: true },
+})
+const emit = defineEmits(['navigate'])
 </script>
 
 <style scoped>
 .sticky-nav {
-  position: fixed; top:0; left:0; right:0;
-  display:flex; gap:.5rem; padding:.5rem .75rem;
-  background:#0e0f12cc; backdrop-filter: blur(8px);
-  z-index:20; border-bottom:1px solid #1d2026;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #0e0f12cc;
+  backdrop-filter: blur(8px);
+  z-index: 20;
+  border-bottom: 1px solid #1d2026;
 }
+
 .sticky-nav a {
-  padding:.4rem .9rem; border-radius:999px; font-size:.7rem;
-  letter-spacing:.06em; text-transform:uppercase;
-  background:#181b21; border:1px solid #262a31; color:#cdd5e0; text-decoration:none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: #181b21;
+  border: 1px solid #262a31;
+  color: #cdd5e0;
+  text-decoration: none;
 }
-.sticky-nav a.active { background:linear-gradient(90deg,#1f2430,#262d39); border-color:#323a46; color:#fff; }
+
+.sticky-nav a.active {
+  background: linear-gradient(90deg, #1f2430, #262d39);
+  border-color: #323a46;
+  color: #fff;
+}
+
 .sticky-nav .gh-link {
-  margin-left:auto; display:flex; align-items:center; justify-content:center;
-  padding:.4rem .65rem; background:#1a1f26; border:1px solid #272e37;
-  border-radius:10px; transition: background .3s, border-color .3s;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.65rem;
+  background: #1a1f26;
+  border: 1px solid #272e37;
+  border-radius: 10px;
+  transition:
+    background 0.3s,
+    border-color 0.3s;
 }
-.sticky-nav .gh-link svg { width:16px; height:16px; fill:#cdd5e0; display:block; }
-.sticky-nav .gh-link:hover { background:#232a33; border-color:#323b46; }
-.sticky-nav .gh-link:active { background:#151a21; }
+
+.sticky-nav .gh-link svg {
+  width: 16px;
+  height: 16px;
+  fill: #cdd5e0;
+  display: block;
+}
+
+.sticky-nav .gh-link:hover {
+  background: #232a33;
+  border-color: #323b46;
+}
+
+.sticky-nav .gh-link:active {
+  background: #151a21;
+}
 </style>

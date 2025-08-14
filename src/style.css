@@ -1,172 +1,158 @@
 :root {
-	--bg: #0e0f12;
-	--text: #f2f2f2;
-	--accent: #d6b25e;
-	--accent2: #6aa7ff;
+  --bg: #0e0f12;
+  --text: #f2f2f2;
+  --accent: #d6b25e;
+  --accent2: #6aa7ff;
 }
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
 body,
 #app {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	font-family: 'Inter', system-ui, sans-serif;
-	background: var(--bg);
-	color: var(--text);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
 html,
 body {
-	max-width: 100%;
-	overflow-x: hidden;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
-	-webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
-	color: var(--accent2);
-	text-decoration: none;
+  color: var(--accent2);
+  text-decoration: none;
 }
 
 h1,
 h2,
 h3 {
-	font-family: 'Playfair Display', serif;
-	margin: 0 0 0.5rem;
-	line-height: 1.15;
+  font-family: 'Playfair Display', serif;
+  margin: 0 0 0.5rem;
+  line-height: 1.15;
 }
 
 section {
-	padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
-	min-height: 92vh;
-	display: block;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
+  min-height: 92vh;
+  display: block;
 }
 
 .container {
-	max-width: 1200px;
-	margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* gradient-text, hero, badge moved to InicioHero.vue scoped styles */
-
 .grid {
-	display: grid;
-	gap: 1.75rem;
+  display: grid;
+  gap: 1.75rem;
 }
 
 @media (min-width: 750px) {
-	.grid.cols-3 {
-		grid-template-columns: repeat(3, 1fr);
-	}
+  .grid.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-/* card moved to DatosEsenciales.vue scoped styles */
-
-/* timeline/event moved to CronologiaView.vue scoped styles */
-
 .fact-list {
-	columns: 2;
-	column-gap: 2rem;
+  columns: 2;
+  column-gap: 2rem;
 }
 
 @media (max-width: 720px) {
-	.fact-list {
-		columns: 1;
-	}
+  .fact-list {
+    columns: 1;
+  }
 }
 
 .fact-list li {
-	break-inside: avoid;
-	margin-bottom: 0.6rem;
+  break-inside: avoid;
+  margin-bottom: 0.6rem;
 }
 
 footer {
-	text-align: center;
-	padding: 0rem 1rem 4rem;
-	font-size: 0.75rem;
-	opacity: 0.65;
+  text-align: center;
+  padding: 0rem 1rem 4rem;
+  font-size: 0.75rem;
+  opacity: 0.65;
 }
 
 .section-title {
-	font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.8rem, 4vw, 3rem);
 }
 
 .section-description {
-	max-width: 760px;
-	line-height: 1.5;
+  max-width: 760px;
+  line-height: 1.5;
 }
 
 .visually-hidden {
-	position: absolute;
-	left: -9999px;
+  position: absolute;
+  left: -9999px;
 }
-
-/* (Eliminado: .map-container ya no se usa) */
-
-/* sticky-nav moved to HeaderNav.vue scoped styles */
-
-/* gallery moved to GaleriaView.vue scoped styles */
-
-/* Curiosidades moved to CuriosidadesView.vue scoped styles */
-
-/* creditos/biblio moved to CreditosView.vue scoped styles */
-
-/* present-btn moved to PresentToggle.vue scoped styles */
-
-/* bloqueo de scroll manual gestionado por listeners en modo presentación */
 
 /* Modo presentación: oscurecer y centrar sección activa */
 .presentation-mode section {
-	transition: opacity 0.5s, transform 0.6s;
-	opacity: 0.12;
-	filter: blur(2px);
+  transition:
+    opacity 0.5s,
+    transform 0.6s;
+  opacity: 0.12;
+  filter: blur(2px);
 }
 
 .presentation-mode section.active {
-	opacity: 1;
-	filter: none;
-	transform: scale(1.01);
-	position: relative;
-	z-index: 10;
-	box-shadow: 0 0 0 1px #ffffff10, 0 12px 38px -8px #000c;
+  opacity: 1;
+  filter: none;
+  transform: scale(1.01);
+  position: relative;
+  z-index: 10;
+  box-shadow:
+    0 0 0 1px #ffffff10,
+    0 12px 38px -8px #000c;
 }
 
 .presentation-mode {
-	overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 .presentation-mode .sticky-nav {
-	opacity: 0;
-	pointer-events: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .presentation-mode .present-btn {
-	box-shadow: 0 0 0 2px #2c343f, 0 0 0 6px #0008;
+  box-shadow:
+    0 0 0 2px #2c343f,
+    0 0 0 6px #0008;
 }
 
 @media (max-width: 800px) {
-	.presentation-mode section {
-		opacity: 1;
-		filter: none;
-		transform: none;
-	}
-	.presentation-mode .sticky-nav {
-		opacity: 1;
-		pointer-events: auto;
-	}
+  .presentation-mode section {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+  .presentation-mode .sticky-nav {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
-/* panteon-grid and card styles moved to PanteonView.vue scoped styles */
-
 /* Lightbox global helpers (componente usa scoped, esto es por si se requiere override futuro) */
-.lightbox body { overflow:hidden; }
+.lightbox body {
+  overflow: hidden;
+}
 
 /* panteón moved to PanteonView.vue scoped styles */
 

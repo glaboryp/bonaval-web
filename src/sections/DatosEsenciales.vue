@@ -1,15 +1,13 @@
 <template>
   <section
     id="datos"
-    :class="{active: active}"
+    :class="{ active: active }"
   >
     <div class="container">
-      <h2 class="section-title">
-        Datos esenciales
-      </h2>
+      <h2 class="section-title">Datos esenciales</h2>
       <div
         class="grid cols-3"
-        style="margin-top:2rem;"
+        style="margin-top: 2rem"
       >
         <div
           v-for="item in esenciales"
@@ -25,10 +23,10 @@
 </template>
 
 <script setup>
-  defineProps({
-    esenciales: { type: Array, required: true },
-    active: { type: Boolean, default: false }
-  })
+defineProps({
+  esenciales: { type: Array, required: true },
+  active: { type: Boolean, default: false },
+})
 </script>
 
 <style scoped>
@@ -40,12 +38,17 @@
   position: relative;
   overflow: hidden;
 }
+
 .card::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 30% 10%, #ffffff08, transparent 70%);
   pointer-events: none;
 }
-.card h3 { margin-top: 0; font-size: 1.1rem; }
+
+.card h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
 </style>

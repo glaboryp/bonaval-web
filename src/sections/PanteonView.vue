@@ -1,12 +1,10 @@
 <template>
   <section
     id="panteon"
-    :class="{active: active}"
+    :class="{ active: active }"
   >
     <div class="container">
-      <h2 class="section-title">
-        Panteón de Gallegos Ilustres
-      </h2>
+      <h2 class="section-title">Panteón de Gallegos Ilustres</h2>
       <p class="section-description">
         {{ panteon.descripcion }}
       </p>
@@ -19,7 +17,7 @@
           <div class="panteon-img-wrap">
             <img
               :src="fig.img"
-              :alt="fig.alt||fig.nombre"
+              :alt="fig.alt || fig.nombre"
               loading="lazy"
             />
           </div>
@@ -39,17 +37,73 @@
 </template>
 
 <script setup>
-  defineProps({ panteon: { type: Object, required: true }, active: { type: Boolean, default: false } })
+defineProps({
+  panteon: { type: Object, required: true },
+  active: { type: Boolean, default: false },
+})
 </script>
 
 <style scoped>
-.panteon-grid { display:grid; gap:1.6rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); margin-top:2rem; }
-.panteon-card { background:#161a20; border:1px solid #242a33; border-radius:18px; overflow:hidden; display:flex; flex-direction:column; position:relative; transition: transform .4s ease, box-shadow .4s; }
-.panteon-card:hover { transform: translateY(-4px); box-shadow: 0 8px 26px -10px #000c; }
-.panteon-img-wrap { position:relative; aspect-ratio: 4/3; overflow:hidden; }
-.panteon-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
-.panteon-info { padding:.8rem .9rem 1rem; }
-.panteon-info h3 { margin:0; font-size:1rem; font-family:'Playfair Display', serif; }
-.panteon-info .meta { margin:0; font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; opacity:.6; }
-.panteon-info .aporte { margin:0; font-size:.75rem; line-height:1.3; opacity:.85; }
+.panteon-grid {
+  display: grid;
+  gap: 1.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  margin-top: 2rem;
+}
+
+.panteon-card {
+  background: #161a20;
+  border: 1px solid #242a33;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s;
+}
+
+.panteon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 26px -10px #000c;
+}
+
+.panteon-img-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.panteon-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.panteon-info {
+  padding: 0.8rem 0.9rem 1rem;
+}
+
+.panteon-info h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.panteon-info .meta {
+  margin: 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.panteon-info .aporte {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  opacity: 0.85;
+}
 </style>
