@@ -149,11 +149,6 @@ footer {
   }
 }
 
-/* Lightbox global helpers (componente usa scoped, esto es por si se requiere override futuro) */
 .lightbox body {
   overflow: hidden;
 }
-
-/* panteón moved to PanteonView.vue scoped styles */
-
-/* repo link styles moved to CreditosView.vue scoped styles */
