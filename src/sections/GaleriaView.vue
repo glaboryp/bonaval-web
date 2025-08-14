@@ -5,14 +5,11 @@
   >
     <div class="container">
       <h2 class="section-title">Galería</h2>
-      <div
-        class="gallery"
-        style="margin-top: 1.5rem"
-      >
+      <div class="gallery gallery--spaced">
         <figure
           v-for="g in galeria"
           :key="g.titulo"
-          style="cursor: pointer"
+          class="gallery-item"
           @click="openLightbox(g)"
         >
           <img
@@ -68,6 +65,10 @@ watch(
   gap: 1.2rem;
 }
 
+.gallery--spaced {
+  margin-top: 1.5rem;
+}
+
 .gallery figure {
   flex: 1 1 calc((100% - 2.4rem) / 3);
   max-width: 340px;
@@ -95,6 +96,10 @@ watch(
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid #222830;
+}
+
+.gallery-item {
+  cursor: pointer;
 }
 
 .gallery img {

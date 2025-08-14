@@ -11,10 +11,10 @@
           :key="e.fecha"
           class="event"
         >
-          <h3 style="margin: 0; font-size: 1rem">
+          <h3 class="event-title">
             {{ e.fecha }}
           </h3>
-          <p style="margin: 0.25rem 0 0; opacity: 0.85">
+          <p class="event-text">
             {{ e.texto }}
           </p>
         </div>
@@ -64,5 +64,15 @@ defineProps({
   background: var(--bg);
   border: 2px solid var(--accent);
   box-shadow: 0 0 0 4px #0e0f12;
+}
+
+.event-title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.event-text {
+  margin: 0.25rem 0 0;
+  opacity: 0.85;
 }
 </style>

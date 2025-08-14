@@ -5,10 +5,7 @@
   >
     <div class="container">
       <h2 class="section-title">Curiosidades</h2>
-      <div
-        class="curios-grid"
-        style="margin-top: 1.5rem"
-      >
+      <div class="curios-grid curios-grid--spaced">
         <article
           v-for="c in curiosidades"
           :key="c.titulo"
@@ -43,6 +40,10 @@ defineProps({
   display: grid;
   gap: 1.8rem;
   grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+}
+
+.curios-grid--spaced {
+  margin-top: 1.5rem;
 }
 
 .curio-card {

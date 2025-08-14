@@ -13,7 +13,7 @@
         src="/galeria/fachada.webp"
         alt="Fachada del convento de Santo Domingo de Bonaval"
         loading="lazy"
-        style="filter: brightness(0.75) saturate(1.1)"
+        class="hero-bg-img"
       />
     </picture>
     <div
@@ -28,7 +28,7 @@
         conjuntos monásticos más sugerentes de Santiago de Compostela. Experimenta su evolución de
         lo gótico al barroco y descubre sus secretos espaciales.
       </p>
-      <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.75">
+      <p class="hero-hint">
         Desplázate o usa el menú superior. También puedes pulsar el botón Presentar para activar el
         modo presentación.
       </p>
@@ -89,6 +89,10 @@ defineProps({ active: { type: Boolean, default: false } })
   animation: heroZoom 22s ease-in-out forwards;
 }
 
+.hero-bg-img {
+  filter: brightness(0.75) saturate(1.1);
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -124,5 +128,11 @@ defineProps({ active: { type: Boolean, default: false } })
   background-clip: text;
   color: transparent;
   font-size: 2.5rem;
+}
+
+.hero-hint {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  opacity: 0.75;
 }
 </style>

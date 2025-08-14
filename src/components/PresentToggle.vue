@@ -14,6 +14,7 @@
 defineProps({ presentationMode: { type: Boolean, required: true } })
 const emit = defineEmits(['toggle'])
 </script>
+
 <style scoped>
 .present-btn {
   position: fixed;

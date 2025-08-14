@@ -5,10 +5,7 @@
   >
     <div class="container">
       <h2 class="section-title">Datos esenciales</h2>
-      <div
-        class="grid cols-3"
-        style="margin-top: 2rem"
-      >
+      <div class="grid cols-3 cards-grid--spaced">
         <div
           v-for="item in esenciales"
           :key="item.titulo"
@@ -50,5 +47,9 @@ defineProps({
 .card h3 {
   margin-top: 0;
   font-size: 1.1rem;
+}
+
+.cards-grid--spaced {
+  margin-top: 2rem;
 }
 </style>

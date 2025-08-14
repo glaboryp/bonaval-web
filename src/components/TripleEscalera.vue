@@ -18,6 +18,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import * as THREE from 'three'
@@ -113,6 +114,7 @@ onUnmounted(() => {
   if (renderer) renderer.dispose()
 })
 </script>
+
 <style scoped>
 .triple-escalera {
   position: relative;
