@@ -9,4 +9,17 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vue: ['vue'],
+          three: ['three'],
+          gsap: ['gsap'],
+        },
+      },
+    },
+    // Opcional: subir umbral del aviso mientras iteramos
+    chunkSizeWarningLimit: 900,
+  },
 })
