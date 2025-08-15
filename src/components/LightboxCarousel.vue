@@ -32,36 +32,42 @@
           @pointermove="onPointerMove"
           @pointerup="onPointerUp"
           @pointerleave="onPointerUp"
+          @mouseenter="preloadAround"
         >
           <button
             class="nav prev"
-            :disabled="idx === 0"
+            :disabled="idx === 0 || isSwitching"
             aria-label="Anterior"
             @click="prev"
+            @mouseenter="() => ensureDecoded(imagenes[idx - 1])"
           >
             ‹
           </button>
           <div class="slides">
-            <TransitionGroup
-              name="fade"
-              tag="div"
-              class="slides-inner"
-            >
-              <img
-                v-for="(src, i) in imagenes"
-                v-show="i === idx"
-                :key="src"
-                :src="src"
-                :alt="item?.titulo + ' imagen ' + (i + 1)"
-                loading="lazy"
-              />
-            </TransitionGroup>
+            <div class="slides-inner">
+              <Transition
+                :name="transitionName"
+                mode="out-in"
+              >
+                <img
+                  v-if="currentSrc"
+                  :key="currentSrc"
+                  class="slide-img"
+                  :src="currentSrc"
+                  :alt="item?.titulo + ' imagen ' + (idx + 1)"
+                  decoding="async"
+                  fetchpriority="high"
+                  loading="eager"
+                />
+              </Transition>
+            </div>
           </div>
           <button
             class="nav next"
-            :disabled="idx === imagenes.length - 1"
+            :disabled="idx === imagenes.length - 1 || isSwitching"
             aria-label="Siguiente"
             @click="next"
+            @mouseenter="() => ensureDecoded(imagenes[idx + 1])"
           >
             ›
           </button>
@@ -75,7 +81,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, watch, onMounted, onBeforeUnmount, computed } from 'vue'
 
 const props = defineProps({
   modelValue: { type: Boolean, default: false },
@@ -95,6 +101,7 @@ watch(open, (v) => emit('update:modelValue', v))
 
 const idx = ref(0)
 const lbRoot = ref(null)
+const transitionName = ref('slide-next')
 
 const imagenes = ref([])
 watch(
@@ -102,8 +109,12 @@ watch(
   (it) => {
     idx.value = 0
     imagenes.value = it?.imagenes?.length ? it.imagenes : it?.img ? [it.img] : []
+    // Pre-carga primeras vecinas para evitar tirones
+    preloadAround()
   }
 )
+
+const currentSrc = computed(() => imagenes.value[idx.value] || null)
 
 function focusRoot() {
   requestAnimationFrame(() => lbRoot.value?.focus())
@@ -111,19 +122,41 @@ function focusRoot() {
 function close() {
   open.value = false
 }
-function next() {
-  if (idx.value < imagenes.value.length - 1) idx.value++
+const isSwitching = ref(false)
+const SWITCH_MS = 480
+async function next() {
+  if (isSwitching.value) return
+  const target = idx.value + 1
+  if (target <= imagenes.value.length - 1) {
+    isSwitching.value = true
+    const src = imagenes.value[target]
+    await ensureDecoded(src)
+    transitionName.value = 'slide-next'
+    idx.value = target
+    preloadAround()
+    setTimeout(() => (isSwitching.value = false), SWITCH_MS)
+  }
 }
-function prev() {
-  if (idx.value > 0) idx.value--
+async function prev() {
+  if (isSwitching.value) return
+  const target = idx.value - 1
+  if (target >= 0) {
+    isSwitching.value = true
+    const src = imagenes.value[target]
+    await ensureDecoded(src)
+    transitionName.value = 'slide-prev'
+    idx.value = target
+    preloadAround()
+    setTimeout(() => (isSwitching.value = false), SWITCH_MS)
+  }
 }
 
 function onKey(e) {
   if (!open.value) return
-  if (e.key === 'ArrowRight') {
+  if (e.key === 'ArrowRight' && !isSwitching.value) {
     next()
   }
-  if (e.key === 'ArrowLeft') {
+  if (e.key === 'ArrowLeft' && !isSwitching.value) {
     prev()
   }
   if (e.key === 'Escape') {
@@ -139,7 +172,9 @@ function onPointerMove(e) {
   if (startX != null) {
     const dx = e.clientX - startX
     if (Math.abs(dx) > 60) {
-      dx < 0 ? next() : prev()
+      if (!isSwitching.value) {
+        dx < 0 ? next() : prev()
+      }
       startX = null
     }
   }
@@ -154,6 +189,36 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', onKey)
 })
+
+// Decodificación y pre-carga para transiciones sin tirones
+const seen = new Set()
+const decodeCache = new Map()
+async function ensureDecoded(src) {
+  if (!src) return
+  if (seen.has(src)) return
+  if (!decodeCache.has(src)) {
+    const im = new Image()
+    im.src = src
+    const p = im.decode
+      ? im.decode().catch(() => {})
+      : new Promise((resolve) => {
+          im.onload = resolve
+          im.onerror = resolve
+        })
+    decodeCache.set(src, p)
+  }
+  await decodeCache.get(src)
+  seen.add(src)
+}
+function preloadAround() {
+  const cur = imagenes.value[idx.value]
+  const next = imagenes.value[idx.value + 1]
+  const prev = imagenes.value[idx.value - 1]
+  ensureDecoded(cur)
+  ensureDecoded(next)
+  ensureDecoded(prev)
+}
+watch(idx, preloadAround)
 </script>
 
 <style scoped>
@@ -170,7 +235,6 @@ onBeforeUnmount(() => {
   position: absolute;
   inset: 0;
   background: #000c;
-  backdrop-filter: blur(4px);
   animation: fadeIn 0.35s ease;
 }
 
@@ -231,15 +295,19 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 3rem; /* deja espacio para las flechas */
 }
 
 .slides-inner {
   position: relative;
   width: 100%;
   height: 100%;
+  contain: content;
+  transform: translateZ(0);
 }
 
-.slides-inner img {
+.slides-inner img,
+.slide-img {
   max-width: 100%;
   max-height: 70vh;
   width: auto;
@@ -249,6 +317,8 @@ onBeforeUnmount(() => {
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 4px 20px -6px #000c;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 .nav {
@@ -267,7 +337,7 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(4px);
+  z-index: 2;
 }
 
 .nav:hover {
@@ -297,14 +367,30 @@ onBeforeUnmount(() => {
   opacity: 0.7;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.35s ease;
+/* Transiciones más fluidas con dirección */
+.slide-next-enter-active,
+.slide-next-leave-active,
+.slide-prev-enter-active,
+.slide-prev-leave-active {
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
-.fade-enter-from,
-.fade-leave-to {
+.slide-next-enter-from {
   opacity: 0;
+  transform: translateX(30px) scale(0.985);
+}
+.slide-next-leave-to {
+  opacity: 0;
+  transform: translateX(-30px) scale(0.985);
+}
+.slide-prev-enter-from {
+  opacity: 0;
+  transform: translateX(-30px) scale(0.985);
+}
+.slide-prev-leave-to {
+  opacity: 0;
+  transform: translateX(30px) scale(0.985);
 }
 
 @keyframes fadeIn {
