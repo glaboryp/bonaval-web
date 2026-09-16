@@ -57,17 +57,17 @@ root
 ## Requisitos previos
 
 - Node.js 18+ (recomendado LTS)
-- npm (o pnpm / yarn si adaptas scripts)
+- pnpm
 
 ## Instalación y uso
 
 ```bash
-npm install
-npm run dev   # Servidor de desarrollo (hot reload)
+pnpm install
+pnpm dev   # Servidor de desarrollo (hot reload)
 # Abrir la URL mostrada (por defecto http://localhost:5173)
 
-npm run build # Genera versión de producción en dist/
-npm run preview # Servir build para comprobación
+pnpm build # Genera versión de producción en dist/
+pnpm preview # Servir build para comprobación
 ```
 
 ## Configuración / Personalización rápida
@@ -84,10 +84,10 @@ npm run preview # Servir build para comprobación
 ## Contribuir
 
 1. Haz un fork o crea una rama descriptiva (`feat/galeria-ampliada`, `fix/accesibilidad-contrast`)
-2. Instala dependencias y ejecuta `npm run dev`
+2. Instala dependencias y ejecuta `pnpm dev`
 3. Aplica cambios (mantén estilo y convenciones, evita introducir dependencias pesadas sin discusión)
 4. Revisa accesibilidad básica (alt en imágenes, foco navegable, contraste)
-5. Ejecuta build para comprobar que no rompe (`npm run build`)
+5. Ejecuta build para comprobar que no rompe (`pnpm build`)
 6. Abre Pull Request explicando: motivación, cambios técnicos, capturas (si UI)
 
 ### Estilo de código

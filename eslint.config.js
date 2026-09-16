@@ -1,5 +1,5 @@
 // ESLint Flat Config para Vue 3 + JavaScript ESM
-// Ejecuta: npm run lint  |  npm run lint:fix
+// Ejecuta: pnpm lint  |  pnpm lint:fix
 
 import js from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'

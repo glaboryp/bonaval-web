@@ -43,6 +43,6 @@ coverage/
 *.tmp
 *.temp
 
-# Lockfiles alternativos (mantén solo uno si decides cambiar gestor)
-# yarn.lock
-# pnpm-lock.yaml
+# Lockfiles alternativos (mantén solo uno)
+package-lock.json
+yarn.lock
