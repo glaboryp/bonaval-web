@@ -12,10 +12,10 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vue: ['vue'],
-          three: ['three'],
-          gsap: ['gsap'],
+        manualChunks(id) {
+          if (id.includes('/node_modules/vue/') || id.includes('/node_modules/@vue/')) return 'vue'
+          if (id.includes('/node_modules/three/')) return 'three'
+          if (id.includes('/node_modules/gsap/')) return 'gsap'
         },
       },
     },
