@@ -5,6 +5,7 @@ import js from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
 import vueParser from 'vue-eslint-parser'
 import eslintConfigPrettier from 'eslint-config-prettier'
+import globals from 'globals'
 
 export default [
   // Ignorar carpetas generadas
@@ -27,6 +28,7 @@ export default [
       parser: vueParser,
       ecmaVersion: 2023,
       sourceType: 'module',
+      globals: globals.browser,
       parserOptions: {
         ecmaVersion: 2023,
         sourceType: 'module',
