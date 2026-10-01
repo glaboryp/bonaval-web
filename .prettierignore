@@ -4,6 +4,7 @@ dist/
 
 # Archivos generados o estáticos pesados
 public/
+pnpm-lock.yaml
 *.log
 
 # Vite cache
